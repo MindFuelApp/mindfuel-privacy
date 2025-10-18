@@ -162,13 +162,14 @@
         <p>The sharing feature only uses your device's built-in sharing capabilities and doesn't transmit data to us.</p>
         
         <h2>🔑 Permissions Explained</h2>
-        <p>MindFuel requests minimal permissions, all of which are optional:</p>
+        <p>MindFuel requests minimal permissions for notification functionality. Here's a complete list:</p>
         
         <h3>POST_NOTIFICATIONS (Android 13+)</h3>
         <ul>
             <li><strong>Purpose:</strong> Send you daily motivational quotes at your chosen time</li>
             <li><strong>Optional:</strong> Yes, can be disabled in settings</li>
             <li><strong>Data Access:</strong> None - only displays pre-loaded quotes</li>
+            <li><strong>Note:</strong> Required for Android 13+ devices to show notifications</li>
         </ul>
         
         <h3>VIBRATE</h3>
@@ -176,14 +177,67 @@
             <li><strong>Purpose:</strong> Provide haptic feedback for better user experience</li>
             <li><strong>Optional:</strong> Yes, can be disabled in app settings</li>
             <li><strong>Data Access:</strong> None - only device vibration</li>
+            <li><strong>Note:</strong> Used for button presses and notification alerts</li>
         </ul>
         
-        <h3>WAKE_LOCK & RECEIVE_BOOT_COMPLETED</h3>
+        <h3>WAKE_LOCK</h3>
         <ul>
-            <li><strong>Purpose:</strong> Ensure notifications continue working after device restart and while device is sleeping</li>
+            <li><strong>Purpose:</strong> Ensure notifications are delivered even when device is sleeping</li>
             <li><strong>Optional:</strong> Automatic, tied to notification feature</li>
-            <li><strong>Data Access:</strong> None - only for system wake-up and boot detection</li>
+            <li><strong>Data Access:</strong> None - only keeps device awake briefly to show notification</li>
+            <li><strong>Note:</strong> Required by Android WorkManager for reliable background scheduling</li>
         </ul>
+        
+        <h3>RECEIVE_BOOT_COMPLETED</h3>
+        <ul>
+            <li><strong>Purpose:</strong> Automatically reschedule notifications after device restart</li>
+            <li><strong>Optional:</strong> Automatic, tied to notification feature</li>
+            <li><strong>Data Access:</strong> None - only detects device boot to reschedule notifications</li>
+            <li><strong>Note:</strong> Ensures your daily quotes continue after phone restarts</li>
+        </ul>
+        
+        <h3>FOREGROUND_SERVICE & FOREGROUND_SERVICE_DATA_SYNC</h3>
+        <ul>
+            <li><strong>Purpose:</strong> Enable reliable notification scheduling through Android WorkManager</li>
+            <li><strong>Optional:</strong> Automatic, required by Android system for background tasks</li>
+            <li><strong>Data Access:</strong> None - only used internally by Android WorkManager</li>
+            <li><strong>Note:</strong> These are automatically added by Android's WorkManager library (Google's official background task API). WorkManager is Google's recommended solution for reliable notification scheduling. No foreground services are visible to users.</li>
+        </ul>
+        
+        <h3>ACCESS_NETWORK_STATE (Optional, Auto-added)</h3>
+        <ul>
+            <li><strong>Purpose:</strong> May be automatically included by Android libraries</li>
+            <li><strong>Usage:</strong> NOT actively used by MindFuel - app works 100% offline</li>
+            <li><strong>Data Access:</strong> None - permission exists but is never accessed</li>
+            <li><strong>Note:</strong> Sometimes auto-added by AndroidX libraries but remains unused</li>
+        </ul>
+        
+        <h3>CHECK_LICENSE (Auto-added by Play Store)</h3>
+        <ul>
+            <li><strong>Purpose:</strong> Google Play Store's built-in license verification and anti-piracy protection</li>
+            <li><strong>Usage:</strong> Automatically added by Play Store to verify legitimate app installation</li>
+            <li><strong>Data Access:</strong> None by MindFuel - handled entirely by Play Store during installation</li>
+            <li><strong>Network Access:</strong> Only used by Play Store at installation time (not by your app)</li>
+            <li><strong>Note:</strong> Standard security feature on all Play Store apps. MindFuel's code never accesses this permission. Your app remains 100% offline during use.</li>
+        </ul>
+        
+        <h3>DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION (Android Security)</h3>
+        <ul>
+            <li><strong>Purpose:</strong> Android's internal security mechanism to protect broadcast receivers</li>
+            <li><strong>Usage:</strong> Automatically created by Android to prevent other apps from sending malicious broadcasts</li>
+            <li><strong>Data Access:</strong> None - purely a security boundary</li>
+            <li><strong>User Impact:</strong> None - completely invisible to users and developers</li>
+            <li><strong>Note:</strong> Standard Android 13+ security feature. Protects your notification system from external interference. No data collection or internet access involved.</li>
+        </ul>
+        
+        <p><strong>Permission Summary:</strong></p>
+        <ul>
+            <li><strong>Explicitly Requested by MindFuel:</strong> 4 permissions (POST_NOTIFICATIONS, VIBRATE, WAKE_LOCK, RECEIVE_BOOT_COMPLETED)</li>
+            <li><strong>Auto-added by Android/WorkManager:</strong> 2 permissions (FOREGROUND_SERVICE, ACCESS_NETWORK_STATE - unused)</li>
+            <li><strong>Auto-added by Play Store:</strong> 1 permission (CHECK_LICENSE - for anti-piracy)</li>
+            <li><strong>Auto-added by Android Security:</strong> 1 permission (DYNAMIC_RECEIVER - for broadcast protection)</li>
+        </ul>
+        <p><strong>Important:</strong> MindFuel remains 100% offline. Auto-added permissions are system-level security features that do not involve data collection or internet access by the app itself. The CHECK_LICENSE permission is only used by Google Play Store during installation to verify legitimate downloads.</p>
         
         <h2>👶 Children's Privacy</h2>
         <p>MindFuel is suitable for all ages:</p>
@@ -230,4 +284,3 @@
     </div>
 </body>
 </html>
-
