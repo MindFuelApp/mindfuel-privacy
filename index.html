@@ -103,7 +103,7 @@
         <p class="subtitle">MindFuel - Your Daily Motivation Companion</p>
         
         <div class="last-updated">
-            <strong>Last Updated:</strong> October 14, 2025
+            <strong>Last Updated:</strong> October 17, 2025
         </div>
         
         <div class="highlight">
@@ -144,10 +144,11 @@
         <h2>📊 Data Storage and Security</h2>
         <p>Your privacy and data security are our top priorities:</p>
         <ul>
-            <li>All data is stored locally using Android's secure storage mechanisms</li>
+            <li>All data is stored locally using Android's secure storage mechanisms (SharedPreferences and DataStore)</li>
             <li>No data is transmitted to external servers or third parties</li>
             <li>No internet connection is required for any app functionality</li>
             <li>You can clear all app data through your device settings at any time</li>
+            <li>Notifications are scheduled locally using Android WorkManager (Google's recommended background task API)</li>
         </ul>
         
         <h2>🔌 Third-Party Services</h2>
@@ -170,13 +171,6 @@
             <li><strong>Data Access:</strong> None - only displays pre-loaded quotes</li>
         </ul>
         
-        <h3>SCHEDULE_EXACT_ALARM</h3>
-        <ul>
-            <li><strong>Purpose:</strong> Schedule notifications at the precise time you select</li>
-            <li><strong>Optional:</strong> Yes, tied to notification feature</li>
-            <li><strong>Data Access:</strong> None - only for scheduling</li>
-        </ul>
-        
         <h3>VIBRATE</h3>
         <ul>
             <li><strong>Purpose:</strong> Provide haptic feedback for better user experience</li>
@@ -186,9 +180,17 @@
         
         <h3>WAKE_LOCK & RECEIVE_BOOT_COMPLETED</h3>
         <ul>
-            <li><strong>Purpose:</strong> Ensure notifications continue working after device restart</li>
+            <li><strong>Purpose:</strong> Ensure notifications continue working after device restart and while device is sleeping</li>
             <li><strong>Optional:</strong> Automatic, tied to notification feature</li>
-            <li><strong>Data Access:</strong> None - only for scheduling</li>
+            <li><strong>Data Access:</strong> None - only for system wake-up and boot detection</li>
+        </ul>
+        
+        <h3>REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</h3>
+        <ul>
+            <li><strong>Purpose:</strong> Request exemption from battery optimization to ensure reliable notification delivery</li>
+            <li><strong>Optional:</strong> Yes, you can grant or deny through system settings</li>
+            <li><strong>Data Access:</strong> None - only requests system-level permission</li>
+            <li><strong>Note:</strong> On some devices (Infinix, Tecno, Xiaomi), this helps notifications work reliably</li>
         </ul>
         
         <h2>👶 Children's Privacy</h2>
@@ -218,8 +220,9 @@
         </ul>
         
         <h2>📧 Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy or our privacy practices:</p>
+        <p>If you have any questions about this Privacy Policy or our privacy practices, please contact us:</p>
         <ul>
+            <li><strong>Email:</strong> taufeeq.mindfuel@gmail.com</li>
             <li>Review the privacy policy in the app: Settings → Privacy Policy</li>
             <li>You can review and delete all app data through your device settings</li>
             <li>We are committed to protecting your privacy and maintaining transparency</li>
@@ -229,7 +232,7 @@
             <p><strong>MindFuel</strong></p>
             <p>Your privacy matters to us</p>
             <p style="margin-top: 20px; font-size: 0.9em;">
-                This privacy policy is effective as of October 14, 2025
+                This privacy policy is effective as of October 17, 2025
             </p>
         </div>
     </div>
